@@ -34,8 +34,13 @@ public class Botato {
                     System.out.println( line + "\nAww... guess you didn't do this task after all:\n"
                             + tasks.get(taskNum) + "\n" + line);
                 }
-            } else {
-                tasks.add(new Task(cmd));
+            } else if (cmd.startsWith("todo")){
+                tasks.add(new Task(cmd, "Todo"));
+                System.out.println(line + "\nadded: " + cmd + "\n" + line);
+            } else if (cmd.startsWith("deadline")){
+                Task task = new Task(cmd, "Deadline");
+                // TODO: add deadline filtering
+                tasks.add(task);
                 System.out.println(line + "\nadded: " + cmd + "\n" + line);
             }
 
