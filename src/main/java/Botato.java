@@ -21,38 +21,54 @@ public class BOTato {
                         .forEach(i -> System.out.println((i + 1) + "." + tasks.get(i)));
                 System.out.println(line);
             } else if (cmd.startsWith("mark ")) {
-                if (cmd.length() == 6 && Character.isDigit(cmd.charAt(5))) {
-                    int taskNum = Character.getNumericValue(cmd.charAt(5));
+                if (cmd.substring(4).isBlank()) {
+                    System.out.println(line + "\nPlease choose the task you completed! You have " + tasks.size() +
+                            " tasks!\n" + line);
+                }
+                String taskStr = cmd.substring(4).strip(); // extract desired task index
+                if (taskStr.matches("-?\\d+")) { // validate that taskStr is an integer
+                    int taskNum = Integer.parseInt(taskStr);
                     if (taskNum > tasks.size()) {
                         System.out.println(line + (tasks.isEmpty() ? "\nYou have no tasks!\n" :
                                 "\nYou only have " + tasks.size() + " task(s)!\n") + line);
                         continue;
                     } else if (taskNum <= 0){
-                        System.out.println(line + "\nInvalid Task Number!\n" + line);
+                        System.out.println(line + "\nTask number cannot be less than 1!\n" + line);
                         continue;
                     }
                     tasks.get(taskNum - 1).isDone = true;
                     System.out.println(line + "\nGood job! I've marked this task as done:\n"
                             + tasks.get(taskNum - 1) + "\n" + line);
+                } else { // if taskStr is not an integer
+                    System.out.println(line + "\nPlease choose a value between 1 and " + tasks.size() +
+                            "to mark as done!\n" + line);
                 }
             } else if (cmd.startsWith("unmark ")) {
-                if (cmd.length() == 8 && Character.isDigit(cmd.charAt(7))) {
-                    int taskNum = Character.getNumericValue(cmd.charAt(7));
+                if (cmd.substring(6).isBlank()) {
+                    System.out.println(line + "\nPlease choose the task you completed! You have " + tasks.size() +
+                            " task(s)!\n" + line);
+                }
+                String taskStr = cmd.substring(6).strip(); // extract desired task index
+                if (taskStr.matches("-?\\d+")) { // validate that taskStr is an integer
+                    int taskNum = Integer.parseInt(taskStr);
                     if (taskNum > tasks.size()) {
                         System.out.println(line + (tasks.isEmpty() ? "\nYou have no tasks!\n" :
                                 "\nYou only have " + tasks.size() + " task(s)!\n") + line);
                         continue;
-                    } else if (taskNum <= 0){
-                        System.out.println(line + "\nInvalid Task Number!\n" + line);
+                    } else if (taskNum <= 0) {
+                        System.out.println(line + "\nTask number cannot be less than 1!\n" + line);
                         continue;
                     }
                     tasks.get(taskNum - 1).isDone = false;
-                    System.out.println(line + "\nAww... guess you didn't do this task after all:\n"
+                    System.out.println(line + "\nAww... Guess you didn't do this after all:\n"
                             + tasks.get(taskNum - 1) + "\n" + line);
+                } else { // if taskStr is not an integer
+                    System.out.println(line + "\nPlease choose a value between 1 and " + tasks.size() +
+                            " to mark as not done!\n" + line);
                 }
             } else if (cmd.startsWith("todo ")){
-                Task task = new Task(cmd.substring(5));
-                if (task.description.isEmpty()) {
+                Task task = new Task(cmd);
+                if (task.msg.isEmpty()) {
                     System.out.println(line + "\nPlease add a description for your task!\n" + line);
                     continue;
                 }
@@ -93,9 +109,33 @@ public class BOTato {
                     System.out.println(line + "\nMake sure your 'event' command contains '/from' and '/to' to set " +
                             "your start and end dates!\n" + line);
                 }
+            } else if (cmd.startsWith("delete ")) {
+                if (cmd.substring(6).strip().isBlank()) { // no task number chosen
+                    System.out.println(line + "\nPlease choose a task you want to delete! You have " + tasks.size() +
+                            " tasks.\n" + line);
+                    continue;
+                }
+                String taskStr = cmd.substring(6).strip(); // extract desired task index
+                if (taskStr.matches("-?\\d+")) { // validate that taskStr is an integer
+                    int taskNum = Integer.parseInt(taskStr); // convert to int
+                    if (taskNum > tasks.size()) {
+                        System.out.println(line + (tasks.isEmpty() ? "\nYou have no tasks!\n" :
+                                "\nYou only have " + tasks.size() + " task(s)!\n") + line);
+                        continue;
+                    } else if (taskNum <= 0) {
+                        System.out.println(line + "\nTask number cannot be less than 1!\n" + line);
+                        continue;
+                    }
+                    Task temp = tasks.get(taskNum - 1);
+                    tasks.remove(taskNum - 1);
+                    System.out.println((line + "\nTask has been successfully removed:\n" + temp + "\n" + line));
+                } else {
+                    System.out.println(line + "\nPlease choose a value between 1 and " + tasks.size() +
+                            "to delete!\n" + line);
+                }
             } else {
                 System.out.println(line + "\nSorry, I don't know what that means... Here are the commands you can " +
-                        "use:\n'bye', 'list', 'mark ', 'unmark ', 'todo ', 'deadline ', 'event '\n" + line);
+                        "use:\n'bye', 'list', 'mark ', 'unmark ', 'todo ', 'deadline ', 'event ', 'delete '\n" + line);
             }
         }
     }
