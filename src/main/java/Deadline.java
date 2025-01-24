@@ -1,6 +1,5 @@
 public class Deadline extends Task {
     protected String by;
-    final String type = "Deadline";
     final String msg;
     public Deadline(String cmd) {
         super(cmd);
@@ -10,6 +9,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s: %s (by: %s)", getStatusIcon(), type, msg, by);
+        return String.format("[%s] Deadline: %s (by: %s)", getStatusIcon(), msg, by);
     }
 }

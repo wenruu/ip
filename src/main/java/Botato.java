@@ -41,7 +41,7 @@ public class BOTato {
                             + tasks.get(taskNum - 1) + "\n" + line);
                 } else { // if taskStr is not an integer
                     System.out.println(line + "\nPlease choose a value between 1 and " + tasks.size() +
-                            "to mark as done!\n" + line);
+                            " to mark as done!\n" + line);
                 }
             } else if (cmd.startsWith("unmark ")) {
                 if (cmd.substring(6).isBlank()) {
@@ -131,7 +131,7 @@ public class BOTato {
                     System.out.println((line + "\nTask has been successfully removed:\n" + temp + "\n" + line));
                 } else {
                     System.out.println(line + "\nPlease choose a value between 1 and " + tasks.size() +
-                            "to delete!\n" + line);
+                            " to delete!\n" + line);
                 }
             } else {
                 System.out.println(line + "\nSorry, I don't know what that means... Here are the commands you can " +

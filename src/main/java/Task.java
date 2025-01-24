@@ -1,7 +1,6 @@
 public class Task {
     protected String description;
     protected boolean isDone;
-    final String type = "Todo";
     final String msg;
 
     public Task(String cmd) {
@@ -16,6 +15,6 @@ public class Task {
 
     @Override
     public String toString() {
-            return String.format("[%s] %s: %s", getStatusIcon(), type, msg);
+            return String.format("[%s] Todo: %s", getStatusIcon(), msg);
     }
 }

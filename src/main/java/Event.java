@@ -1,7 +1,6 @@
 public class Event extends Task {
     protected String from;
     protected String to;
-    final String type = "Event";
     final String msg;
 
     public Event(String cmd) {
@@ -13,6 +12,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s: %s (from %s to %s)", getStatusIcon(), type, msg, from, to);
+        return String.format("[%s] Event: %s (from %s to %s)", getStatusIcon(), msg, from, to);
     }
 }
