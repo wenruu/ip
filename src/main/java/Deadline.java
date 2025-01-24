@@ -1,11 +1,11 @@
 public class Deadline extends Task {
     protected String by;
     final String type = "Deadline";
-    private final String msg;
+    final String msg;
     public Deadline(String cmd) {
         super(cmd);
-        this.by = cmd.substring(cmd.indexOf("/by") + 4);
-        msg = cmd.substring(9, cmd.indexOf('/') - 1);
+        this.by = cmd.substring(cmd.indexOf("/by") + 3).strip();
+        msg = cmd.substring(9, cmd.indexOf('/')).strip();
     }
 
     @Override
