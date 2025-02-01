@@ -1,19 +1,25 @@
-import java.util.*;
+import java.io.*;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class BOTato {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         String line = "---------------------------------------------------------------------------------------------------------------";
-        String helloMessage = line + "\nHello from BOTato!\nWhat can I do for you?\n" + line;
-        String goodbyeMessage = line + "\nHope I helped! See you again!\n" + line;
-        ArrayList<Task> tasks = new ArrayList<>();
-        System.out.println(helloMessage);
+        String helloMessage = "Hello from BOTato!\nWhat can I do for you?\n";
+        System.out.println(line);
+        ArrayList<Task> tasks = loadData();
+        System.out.println(helloMessage + line);
         int terminate = 0;
         while (terminate != 1) {
+            // Keeps reading commands until "bye" is typed
             String cmd = reader.nextLine();
             if (cmd.equals("bye")) {
-                System.out.println(goodbyeMessage);
+                System.out.println(line);
+                writeData(tasks);
+                System.out.println("\nHope I helped! See you again!\n" + line);
                 terminate = 1;
             } else if (cmd.equals("list")) {
                 System.out.println(line + "\nHere are your current tasks:");
@@ -137,6 +143,52 @@ public class BOTato {
                 System.out.println(line + "\nSorry, I don't know what that means... Here are the commands you can " +
                         "use:\n'bye', 'list', 'mark ', 'unmark ', 'todo ', 'deadline ', 'event ', 'delete '\n" + line);
             }
+        }
+    }
+
+    /**
+     * Saves data to './data/data.txt'.
+     * If './data/' does not exist, create it and save.
+     * @param data 'tasks' ArrayList
+     */
+    private static void writeData (ArrayList<Task> data)  {
+        // Check if data directory exists; if not, create it
+        String directoryPath = "./data/";
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        try (FileOutputStream fileOut = new FileOutputStream("./data/data.txt");
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(data);
+            System.out.println("Data has been saved!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Loads data from './data/data/txt'.
+     * If file does not exist, return empty ArrayList instead.
+     * @return ArrayList containing tasks.
+     */
+    private static ArrayList<Task> loadData() {
+        try (FileInputStream fileIn = new FileInputStream("./data/data.txt");
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            Object obj = in.readObject();
+            if (obj instanceof ArrayList) {
+                // Safe to cast to ArrayList<Task>
+                @SuppressWarnings("unchecked")
+                ArrayList<Task> data = (ArrayList<Task>) obj;
+                System.out.println("Data has been loaded!");
+                return data;
+            } else {
+                System.out.println("Unexpected object type: " + obj.getClass().getName());
+                return new ArrayList<>();
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }
