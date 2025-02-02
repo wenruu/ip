@@ -1,3 +1,5 @@
+package botato.task;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +29,9 @@ public class Deadline extends Task {
         description = cmd.substring(9, cmd.indexOf('/')).strip();
     }
 
+    public boolean noBy() {
+        return by == null;
+    }
     /**
      * Overrides toString() method to print custom String
      * @return String containing status, Deadline Task type, description and deadline

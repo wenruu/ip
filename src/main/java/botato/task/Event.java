@@ -1,4 +1,5 @@
-import java.time.LocalDate;
+package botato.task;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,8 +23,8 @@ import java.time.format.DateTimeFormatter;
  * </pre>
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    public final LocalDateTime from;
+    public final LocalDateTime to;
 
     public Event(String cmd) {
         String fromStr = cmd.substring(cmd.indexOf("/from") + 6, cmd.indexOf("/to")).strip();

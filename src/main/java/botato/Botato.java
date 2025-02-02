@@ -1,3 +1,9 @@
+package botato;
+import botato.task.Deadline;
+import botato.task.Event;
+import botato.task.Task;
+import botato.task.Todo;
+
 import java.io.*;
 
 import java.util.ArrayList;
@@ -5,6 +11,7 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class Botato {
+    private Ui ui;
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         String line = "---------------------------------------------------------------------------------------------------------------";
@@ -12,8 +19,8 @@ public class Botato {
         System.out.println(line);
         ArrayList<Task> tasks = loadData();
         System.out.println(helloMessage + line);
-        int terminate = 0;
-        while (terminate != 1) {
+        boolean isExit = false;
+        while (!isExit) {
             // Keeps reading commands until "bye" is typed
             String cmd = reader.nextLine();
             if (cmd.equals("bye")) {
@@ -21,7 +28,7 @@ public class Botato {
                 System.out.println(line);
                 writeData(tasks);
                 System.out.println("Hope I helped! See you again!\n" + line);
-                terminate = 1;
+                isExit = true;
             } else if (cmd.equals("list")) {
                 // Display list of tasks
                 System.out.println(line + "\nHere are your current tasks:");
@@ -46,7 +53,7 @@ public class Botato {
                         System.out.println(line + "\nTask number cannot be less than 1!\n" + line);
                         continue;
                     }
-                    tasks.get(taskNum - 1).isDone = true;
+                    tasks.get(taskNum - 1).setIsDone(true);
                     System.out.println(line + "\nGood job! I've marked this task as done:\n"
                             + tasks.get(taskNum - 1) + "\n" + line);
                 } else { // if taskStr is not an integer
@@ -71,7 +78,7 @@ public class Botato {
                         System.out.println(line + "\nTask number cannot be less than 1!\n" + line);
                         continue;
                     }
-                    tasks.get(taskNum - 1).isDone = false;
+                    tasks.get(taskNum - 1).setIsDone(false);
                     System.out.println(line + "\nAww... Guess you didn't do this after all:\n"
                             + tasks.get(taskNum - 1) + "\n" + line);
                 } else {
@@ -82,7 +89,7 @@ public class Botato {
             } else if (cmd.startsWith("todo ")){
                 // Add a Task of type Todo to tasks
                 Task task = new Todo(cmd);
-                if (task.description.isEmpty()) {
+                if (task.noDescription()) {
                     System.out.println(line + "\nPlease add a description for your task!\n" + line);
                     continue;
                 }
@@ -92,10 +99,10 @@ public class Botato {
                 // Add a Task of type Deadline to tasks
                 if (cmd.contains("/by")) {
                     Deadline task = new Deadline(cmd);
-                    if (task.description.isEmpty()) {
+                    if (task.noDescription()) {
                         System.out.println(line + "\nPlease add a description to your task!\n" + line);
                         continue;
-                    } else if (task.by == null) {
+                    } else if (task.noBy()) {
                         System.out.println(line + "\nPlease add a deadline in a valid format!\n"
                                 + "Type 'dateformats' to get a full list of supported formats.\n" + line);
                         continue;
@@ -110,7 +117,7 @@ public class Botato {
                 // Add a Task of type Event to tasks
                 if (cmd.contains("/to") && cmd.contains(("/from"))) {
                     Event task = new Event(cmd);
-                    if (task.description.isEmpty()) {
+                    if (task.noDescription()) {
                         System.out.println(line + "\nPlease add a description to your task!\n" + line);
                         continue;
                     } else if (task.from == null) {
