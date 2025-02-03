@@ -14,6 +14,6 @@ public class InvalidDateTimeFormatException extends BotatoException {
                 "dd/MM/yy\n" +
                 "dd MMM yyyy HH:mm:ss\n" +
                 "dd MMM yyyy HH:mm\n" +
-                "dd MMM yyyy\n");
+                "dd MMM yyyy");
     }
 }

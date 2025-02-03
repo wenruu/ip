@@ -12,13 +12,8 @@ public class EventCommand extends Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        //TODO: brush up on this
-        if (cmd.contains("/to") && cmd.contains(("/from"))) {
-            Event task = new Event(cmd);
-            tasks.addTask(task);
-            System.out.println("Event added:\n" + task);
-        } else {
-            throw new MissingParamException("/to' and '/from");
-        }
+        Event task = new Event(cmd);
+        tasks.addTask(task);
+        System.out.println("Event added:\n" + task);
     }
 }

@@ -8,5 +8,6 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui) {
         super.isExit = true;
         tasks.save();
+        System.out.println("Hope I helped! See you~");
     }
 }

@@ -2,6 +2,9 @@ package botato.command;
 
 import botato.TaskList;
 import botato.Ui;
+import botato.exception.MissingDescriptionException;
+import botato.task.Task;
+import botato.task.Todo;
 
 public class TodoCommand extends Command {
     private String cmd;
@@ -10,6 +13,8 @@ public class TodoCommand extends Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        // TODO: handle exceptions eg missing description
+        Task task = new Todo(cmd);
+        tasks.addTask(task);
+        System.out.println("Todo added:\n" + task);
     }
 }
