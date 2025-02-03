@@ -1,6 +1,5 @@
 package botato.command;
 
-import botato.Storage;
 import botato.TaskList;
 import botato.Ui;
 import botato.exception.InvalidTaskNumberException;
@@ -12,7 +11,7 @@ public class UnmarkCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui) {
         if (cmd.substring(6).isBlank()) {
             throw new NoTaskSelectedException(tasks.size());
         }

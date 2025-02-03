@@ -1,5 +1,7 @@
 package botato.task;
 
+import botato.exception.MissingDescriptionException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +29,9 @@ public class Deadline extends Task {
         String dateStr = cmd.substring(cmd.indexOf("/by") + 3).strip();
         by = parseDate(dateStr, LocalTime.of(23, 59));
         description = cmd.substring(9, cmd.indexOf('/')).strip();
+        if (description.isBlank()) {
+            throw new MissingDescriptionException();
+        }
     }
 
     public boolean noBy() {

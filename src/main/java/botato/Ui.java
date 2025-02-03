@@ -1,6 +1,12 @@
 package botato;
 
+import java.util.Scanner;
+
 public class Ui {
+    private Scanner reader;
+    public Ui() {
+        reader = new Scanner(System.in);
+    }
     public void showWelcome() {
         String welcomeMessage = "Welcome to BOTato! How may I help you today?";
         showLine();
@@ -8,6 +14,9 @@ public class Ui {
         showLine();
     }
 
+    public String readCommand() {
+        return reader.nextLine();
+    }
     public void showLine() {
         String line = "------------------------------------------------------------------------------------------------"
                 + "---------------";
@@ -15,8 +24,6 @@ public class Ui {
     }
 
     public void showError(String message) {
-        showLine();
         System.out.println(message);
-        showLine();
     }
 }

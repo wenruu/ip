@@ -1,5 +1,7 @@
 package botato.task;
 
+import botato.exception.MissingDescriptionException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +34,9 @@ public class Event extends Task {
         this.from = parseDate(fromStr, LocalTime.of(0, 0));
         this.to = parseDate(toStr, LocalTime.of(23, 59));
         description = cmd.substring(6, cmd.indexOf('/')).strip();
+        if (description.isBlank()) {
+            throw new MissingDescriptionException();
+        }
     }
 
     /**

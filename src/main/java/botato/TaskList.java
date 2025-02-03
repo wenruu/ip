@@ -18,13 +18,13 @@ public class TaskList {
     public void addTask(Task task) {
         taskArrayList.add(task);
     }
+    public Task deleteTask(int taskNum) {
+        return taskArrayList.remove(taskNum - 1);
+    }
 
     public void setTaskStatus(int taskNum, boolean status) {
         Task task = taskArrayList.get(taskNum - 1);
-        if (task.status() == status) {
-            throw new SameStatusException(status);
-        }
-        task.setIsDone(status);
+        task.complete(status);
     }
 
     public void save() {
