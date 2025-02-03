@@ -23,7 +23,6 @@ public class Botato {
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
-            // Keeps reading commands until "bye" is typed
             try {
                 String cmd = ui.readCommand();
                 ui.showLine();
