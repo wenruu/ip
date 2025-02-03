@@ -1,10 +1,14 @@
+package botato.task;
+
+import botato.exception.InvalidDateTimeFormatException;
+import botato.exception.SameStatusException;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.Temporal;
 
 /**
  * Represents a task with a description and a completion status.
@@ -22,6 +26,17 @@ public class Task implements Serializable {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
+    /**
+     * Set task status.
+     * @param isDone sets task status
+     * @throws SameStatusException if task is already complete / incomplete
+     */
+    public void complete(boolean isDone)  {
+        if (this.isDone == isDone) {
+            throw new SameStatusException(isDone);
+        }
+        this.isDone = isDone;
+    }
     /**
      * Parses a given date string into a {@link LocalDateTime} object based on various supported date formats.
      * If the date string does not include a time component, the provided {@link LocalTime} defaultTime is used
@@ -88,7 +103,10 @@ public class Task implements Serializable {
                 LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd MMM yyyy"));
                 return LocalDateTime.of(date, defaultTime);
             }
-        } catch (DateTimeParseException ignored) {}
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeFormatException();
+        }
         return null;
     }
+
 }

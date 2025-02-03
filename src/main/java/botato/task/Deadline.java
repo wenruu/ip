@@ -1,3 +1,9 @@
+package botato.task;
+
+import botato.exception.InvalidDateTimeFormatException;
+import botato.exception.MissingDescriptionException;
+import botato.exception.MissingParamException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,11 +28,24 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     public Deadline(String cmd) {
+        if (!cmd.contains("/by")) {
+            throw new MissingParamException("/by");
+        }
         String dateStr = cmd.substring(cmd.indexOf("/by") + 3).strip();
-        by = parseDate(dateStr, LocalTime.of(23, 59));
+        try {
+            by = parseDate(dateStr, LocalTime.of(23, 59));
+        } catch (Exception e) {
+            throw new InvalidDateTimeFormatException();
+        }
         description = cmd.substring(9, cmd.indexOf('/')).strip();
+        if (description.isBlank()) {
+            throw new MissingDescriptionException();
+        }
     }
 
+    public boolean noBy() {
+        return by == null;
+    }
     /**
      * Overrides toString() method to print custom String
      * @return String containing status, Deadline Task type, description and deadline

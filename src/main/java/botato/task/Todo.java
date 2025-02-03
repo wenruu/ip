@@ -1,3 +1,7 @@
+package botato.task;
+
+import botato.exception.MissingDescriptionException;
+
 /**
  * Represents a Todo task, which is a specific type of Task.
  * A Todo task has a description but no additional date or time constraints.
@@ -16,6 +20,9 @@
 public class Todo extends Task {
     public Todo(String cmd) {
         description = cmd.substring(4).strip();
+        if (description.isBlank()) {
+            throw new MissingDescriptionException();
+        }
     }
 
     /**

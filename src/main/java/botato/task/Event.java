@@ -1,4 +1,9 @@
-import java.time.LocalDate;
+package botato.task;
+
+import botato.exception.InvalidDateTimeFormatException;
+import botato.exception.MissingDescriptionException;
+import botato.exception.MissingParamException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -22,15 +27,24 @@ import java.time.format.DateTimeFormatter;
  * </pre>
  */
 public class Event extends Task {
-    protected LocalDateTime from;
-    protected LocalDateTime to;
+    public final LocalDateTime from;
+    public final LocalDateTime to;
 
     public Event(String cmd) {
+        if (!(cmd.contains("/from") && cmd.contains("/to"))) {
+            throw new MissingParamException("/from' or '/to");
+        }
         String fromStr = cmd.substring(cmd.indexOf("/from") + 6, cmd.indexOf("/to")).strip();
         String toStr = cmd.substring(cmd.indexOf("/to") + 3).strip();
         this.from = parseDate(fromStr, LocalTime.of(0, 0));
         this.to = parseDate(toStr, LocalTime.of(23, 59));
+        if (from == null || to == null) {
+            throw new InvalidDateTimeFormatException();
+        }
         description = cmd.substring(6, cmd.indexOf('/')).strip();
+        if (description.isBlank()) {
+            throw new MissingDescriptionException();
+        }
     }
 
     /**
