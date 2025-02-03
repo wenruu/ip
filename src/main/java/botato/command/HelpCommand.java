@@ -8,7 +8,6 @@ public class HelpCommand extends Command {
     public void execute(TaskList tasks, Ui ui) {
         System.out.println("""
                 Here are the commands you can use:
-                'bye', 'list', 'mark ', 'unmark ', 'todo ', 'deadline ', 'event ', 'delete ', 'help'
-                """);
+                'bye', 'list', 'mark ', 'unmark ', 'todo ', 'deadline ', 'event ', 'delete ', 'help'""");
     }
 }

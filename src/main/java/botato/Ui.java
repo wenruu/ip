@@ -8,8 +8,21 @@ public class Ui {
         reader = new Scanner(System.in);
     }
     public void showWelcome() {
-        String welcomeMessage = "Welcome to BOTato! How may I help you today?";
+        String welcomeMessage = """
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠴⠒⠋⠉⠉⠉⠉⠙⠒⠲⠤⢴⣤⣄⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣀⡴⠋⠁⠀⠀⠳⠀⠀⠀⢀⠀⠶⢤⣄⣀⠀⠀⠈⠉⠳⡄⠀
+⠀⠀⠀⢀⠴⠊⠁⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠘⠆⠘⡄
+⠀⢀⠜⠁⢠⠄⢀⣀⣑⣀⡀⠀⠀⠀⠀⠀⡤⠤⠤⠤⡄⠀⠀⢀⠀⠀⠀⡤⠀⢱
+⢀⠎⠀⠀⠈⠀⢸⠠⠤⠄⢹⠀⠀⠀⠀⠀⡇⠤⠤⠄⠇⠀⠀⠀⠃⠀⠀⠀⠀⢸
+⡎⠀⠀⠀⠀⠀⠨⠉⠉⠉⠉⠀⠀⡆⠀⠀⠉⠉⠉⠩⠃⠀⠀⠀⠠⠄⢀⣀⣠⠏
+⣧⠀⠈⡆⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢀⣀⠀⠀⠀⠀⠀⠀⣨⠁⠀
+⡟⠄⠀⢸⡄⠀⠀⠀⠀⠈⢯⡉⠉⠈⠉⠉⠉⠉⡝⠈⠛⠃⠀⠀⠀⣠⡾⠃⠀⠀
+⢱⡈⠀⠀⠁⠀⠀⠀⠀⠀⠀⠉⠒⠒⠐⠒⠒⠊⠁⠀⢀⣠⠀⣀⡴⠋⠀⠀⠀⠀
+⠀⠑⢤⣀⠀⠀⣖⡆⠀⠀⠀⢤⡤⣀⣀⠰⠄⠀⠀⠀⠀⢀⣠⠏⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠈⠙⠒⠢⠤⠤⣄⣀⣠⣤⣬⠶⠶⠦⠤⠶⠖⠚⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+Welcome to BOTato! How may I help you today?""";
         showLine();
+
         System.out.println(welcomeMessage);
         showLine();
     }

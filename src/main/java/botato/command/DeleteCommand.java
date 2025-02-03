@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
                 throw new InvalidTaskNumberException(tasks.size());
             }
             Task removedTask = tasks.deleteTask(taskNum);
-            System.out.println("\nTask has been successfully removed:\n" + removedTask);
+            System.out.println("Task has been successfully removed:\n" + removedTask);
         } else {
             throw new InvalidTaskNumberException(tasks.size());
         }
