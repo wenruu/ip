@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 public class TaskList {
     private static ArrayList<Task> taskArrayList;
     public TaskList() {
-        // load data from file into ArrayList
+        // load data from file into ArrayList 
         taskArrayList = Storage.load();
     }
     public int size() {
