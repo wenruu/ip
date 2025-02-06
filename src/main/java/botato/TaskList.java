@@ -1,5 +1,6 @@
 package botato;
 
+import botato.exception.KeywordNotFoundException;
 import botato.exception.SameStatusException;
 import botato.task.Task;
 
@@ -34,6 +35,21 @@ public class TaskList {
         System.out.println(taskArrayList.isEmpty() ? "You have no tasks!" : "Here are your current tasks:");
         IntStream.range(0, taskArrayList.size())
                 .forEach(i -> System.out.println((i + 1) + "." + taskArrayList.get(i)));
+    }
+
+    public void find(String keyword) {
+        ArrayList<Task> temp = new ArrayList<>();
+        taskArrayList.forEach(task -> {
+            if (task.toString().contains(keyword)) {
+                temp.add(task);
+            }
+        });
+        if (temp.isEmpty()) {
+            throw new KeywordNotFoundException();
+        }
+        System.out.println("Here are your tasks containing the keyword:");
+        IntStream.range(0, temp.size())
+                .forEach(i -> System.out.println((i + 1) + "." + temp.get(i)));
     }
 
     public void save() {

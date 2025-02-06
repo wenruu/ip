@@ -32,6 +32,8 @@ public class Parser {
         } else if (cmd.equals("help")) {
             // Opens help interface
             return new HelpCommand();
+        } else if (cmd.matches("^find\\s+.+"))  {
+            return new FindCommand(cmd);
         } else {
             // Handle invalid commands
             throw new InvalidCommandException();
