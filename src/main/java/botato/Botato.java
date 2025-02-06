@@ -1,20 +1,10 @@
 package botato;
 import botato.command.Command;
 import botato.exception.BotatoException;
-import botato.task.Deadline;
-import botato.task.Event;
-import botato.task.Task;
-import botato.task.Todo;
-
-import java.io.*;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class Botato {
-    private TaskList tasks;
-    private Ui ui;
+    private final TaskList tasks;
+    private final Ui ui;
     public Botato() {
         ui = new Ui();
         tasks = new TaskList();

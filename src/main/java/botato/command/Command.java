@@ -7,11 +7,12 @@ import botato.Ui;
 public abstract class Command {
     protected boolean isExit = false;
 
-    void execute(TaskList tasks, Ui ui, Storage storage) {
-        execute(tasks, ui);
-    }
-
     public abstract void execute(TaskList tasks, Ui ui);
+
+    /**
+     * isExit is only true if 'bye' command was typed.
+     * @return isExit
+     */
     public boolean isExit() {
         return isExit;
     }

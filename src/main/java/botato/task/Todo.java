@@ -20,9 +20,6 @@ import botato.exception.MissingDescriptionException;
 public class Todo extends Task {
     public Todo(String cmd) {
         description = cmd.substring(4).strip();
-        if (description.isBlank()) {
-            throw new MissingDescriptionException();
-        }
     }
 
     /**

@@ -1,13 +1,7 @@
 package botato;
 
 import botato.command.*;
-import botato.exception.InvalidTaskNumberException;
-import botato.exception.NoTaskSelectedException;
-import botato.exception.UnknownCommandException;
-import botato.task.Deadline;
-import botato.task.Event;
-import botato.task.Task;
-import botato.task.Todo;
+import botato.exception.InvalidCommandException;
 
 public class Parser {
     public static Command parse(String cmd) {
@@ -17,30 +11,30 @@ public class Parser {
         } else if (cmd.equals("list")) {
             // Display list of tasks
             return new ListCommand();
-        } else if (cmd.startsWith("mark ")) {
+        } else if (cmd.matches("^mark \\d+$")) {
             // Mark specific task as completed
             return new MarkCommand(cmd);
-        } else if (cmd.startsWith("unmark ")) {
+        } else if (cmd.matches("^unmark \\d+$")) {
             // Mark specified task as not done
-                return new UnmarkCommand(cmd);
-        } else if (cmd.startsWith("todo ")){
+            return new UnmarkCommand(cmd);
+        } else if (cmd.matches("^todo\\s+.+$")){
             // Add a Task of type Todo to tasks
             return new TodoCommand(cmd);
-        } else if (cmd.startsWith("deadline")){
+        } else if (cmd.matches("^deadline\\s+.+/by\\s+.+$")){
             // Add a Task of type Deadline to tasks
             return new DeadlineCommand(cmd);
-        } else if (cmd.startsWith("event ")) {
+        } else if (cmd.matches("^event\\s+.+/from\\s+.+/to\\s+.+$")) {
             // Add a Task of type Event to tasks
             return new EventCommand(cmd);
-        } else if (cmd.startsWith("delete ")) {
+        } else if (cmd.matches("^delete \\d+$")) {
             // Delete a specified task based on task number given
             return new DeleteCommand(cmd);
         } else if (cmd.equals("help")) {
-            // Prints out available commands
+            // Opens help interface
             return new HelpCommand();
         } else {
-            // Handle unknown commands
-            throw new UnknownCommandException();
+            // Handle invalid commands
+            throw new InvalidCommandException();
         }
     }
 }

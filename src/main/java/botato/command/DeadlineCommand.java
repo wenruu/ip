@@ -6,7 +6,7 @@ import botato.task.Deadline;
 import botato.task.Task;
 
 public class DeadlineCommand extends Command {
-    private String cmd;
+    private final String cmd;
     public DeadlineCommand(String cmd) {
         this.cmd = cmd;
     }

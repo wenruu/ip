@@ -27,7 +27,7 @@ public class TaskList {
     public void setTaskStatus(int taskNum, boolean status) {
         Task task = taskArrayList.get(taskNum - 1);
         task.complete(status);
-        System.out.println((status ? "Good job! You finished this:" : "Aww.. Guess you didn't do this yet:") + task);
+        System.out.println((status ? "Good job! You finished this:\n" : "Aww.. Guess you didn't do this yet:\n") + task);
     }
 
     public void show() {

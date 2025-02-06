@@ -6,25 +6,16 @@ import botato.exception.InvalidTaskNumberException;
 import botato.exception.NoTaskSelectedException;
 
 public class UnmarkCommand extends Command {
-    private String cmd;
+    private final String cmd;
     public UnmarkCommand(String cmd) {
         this.cmd = cmd;
     }
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        if (cmd.substring(6).isBlank()) {
-            throw new NoTaskSelectedException(tasks.size());
-        }
-        String taskStr = cmd.substring(6).strip(); // extract desired task index
-        if (taskStr.matches("-?\\d+")) {
-            // Validate that taskStr is an integer
-            int taskNum = Integer.parseInt(taskStr);
-            if (taskNum <= 0 || taskNum > tasks.size()) {
-                throw new InvalidTaskNumberException(tasks.size());
-            }
-            tasks.setTaskStatus(taskNum, false);
-        } else {
+        int taskNum = Integer.parseInt(cmd.substring(6).strip());
+        if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new InvalidTaskNumberException(tasks.size());
         }
+        tasks.setTaskStatus(taskNum, false);
     }
 }

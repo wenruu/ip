@@ -28,24 +28,11 @@ public class Deadline extends Task {
     protected LocalDateTime by;
 
     public Deadline(String cmd) {
-        if (!cmd.contains("/by")) {
-            throw new MissingParamException("/by");
-        }
         String dateStr = cmd.substring(cmd.indexOf("/by") + 3).strip();
-        try {
-            by = parseDate(dateStr, LocalTime.of(23, 59));
-        } catch (Exception e) {
-            throw new InvalidDateTimeFormatException();
-        }
+        by = parseDate(dateStr, LocalTime.of(23, 59));
         description = cmd.substring(9, cmd.indexOf('/')).strip();
-        if (description.isBlank()) {
-            throw new MissingDescriptionException();
-        }
     }
 
-    public boolean noBy() {
-        return by == null;
-    }
     /**
      * Overrides toString() method to print custom String
      * @return String containing status, Deadline Task type, description and deadline

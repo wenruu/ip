@@ -6,7 +6,7 @@ import botato.exception.MissingParamException;
 import botato.task.Event;
 
 public class EventCommand extends Command {
-    private String cmd;
+    private final String cmd;
     public EventCommand(String cmd) {
         this.cmd = cmd;
     }

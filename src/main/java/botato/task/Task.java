@@ -103,10 +103,10 @@ public class Task implements Serializable {
                 LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern("dd MMM yyyy"));
                 return LocalDateTime.of(date, defaultTime);
             }
-        } catch (DateTimeParseException e) {
+        } catch (Exception e) {
             throw new InvalidDateTimeFormatException();
         }
-        return null;
+        throw new InvalidDateTimeFormatException();
     }
 
 }

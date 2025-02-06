@@ -7,7 +7,7 @@ import botato.task.Task;
 import botato.task.Todo;
 
 public class TodoCommand extends Command {
-    private String cmd;
+    private final String cmd;
     public TodoCommand(String cmd) {
         this.cmd = cmd;
     }

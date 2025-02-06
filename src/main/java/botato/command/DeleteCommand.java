@@ -13,7 +13,7 @@ public class DeleteCommand extends Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        if (cmd.substring(6).strip().isBlank()) {
+        if (cmd.length() == 6 || cmd.substring(6).strip().isBlank()) {
             // Handle no task number given
             throw new NoTaskSelectedException(tasks.size());
         }
