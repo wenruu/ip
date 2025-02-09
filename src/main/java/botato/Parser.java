@@ -10,6 +10,7 @@ public class Parser {
     /**
      * Parses user input string and returns relevant command.
      * If input string is not a valid command, throws {@link InvalidCommandException}.
+     *
      * @param cmd is user input read by {@link Ui#readCommand()}.
      * @return {@link Command} object based on input.
      */
