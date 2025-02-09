@@ -1,10 +1,6 @@
 package botato;
 
-<<<<<<< HEAD
-=======
 import botato.exception.KeywordNotFoundException;
-import botato.exception.SameStatusException;
->>>>>>> branch-A-CodingStandard
 import botato.task.Task;
 
 import java.util.ArrayList;
