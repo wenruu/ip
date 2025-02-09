@@ -19,7 +19,6 @@ public class TaskList {
 
     /**
      * Return number of tasks.
-     *
      * @return number of elements in taskArrayList.
      */
     public int size() {
@@ -28,7 +27,6 @@ public class TaskList {
 
     /**
      * Adds a specified task to the task list.
-     *
      * @param task to add to taskArrayList.
      */
     public void addTask(Task task) {
@@ -37,7 +35,6 @@ public class TaskList {
 
     /**
      * Deletes a specified task index from taskArrayList.
-     *
      * @param taskNum to delete from task list.
      * @return Task deleted.
      */
@@ -47,7 +44,6 @@ public class TaskList {
 
     /**
      * Sets a task to completed or incomplete status.
-     *
      * @param taskNum to set status.
      * @param status to set task to.
      */

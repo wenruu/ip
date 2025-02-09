@@ -11,6 +11,11 @@ import botato.exception.MissingDescriptionException;
  * The description of the Todo task is extracted from the input command string
  * and stored in the {@code description} field inherited from the {@link Task} class.
  * <p>
+ * Example usage:
+ * <pre>
+ * Todo todo = new Todo("todo Buy groceries");
+ * System.out.println(todo); // Outputs: "[ ] Todo: Buy groceries"
+ * </pre>
  */
 public class Todo extends Task {
     public Todo(String cmd) {

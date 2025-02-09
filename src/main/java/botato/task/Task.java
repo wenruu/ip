@@ -41,11 +41,25 @@ public class Task implements Serializable {
      * Parses a given date string into a {@link LocalDateTime} object based on various supported date formats.
      * If the date string does not include a time component, the provided {@link LocalTime} defaultTime is used
      * to construct the {@link LocalDateTime} object.
-     * Throws {@link InvalidDateTimeFormatException} if format does not match.
-
+     * <p>
+     * Supported date formats include:
+     * - "yyyy-MM-dd HH:mm:ss"
+     * - "yyyy-MM-dd HH:mm"
+     * - "yyyy-MM-dd"
+     * - "dd/MM/yyyy HH:mm:ss"
+     * - "dd/MM/yyyy HH:mm"
+     * - "dd/MM/yyyy"
+     * - "dd/MM/yy HH:mm:ss"
+     * - "dd/MM/yy HH:mm"
+     * - "dd/MM/yy"
+     * - "dd MMM yyyy HH:mm:ss"
+     * - "dd MMM yyyy HH:mm"
+     * - "dd MMM yyyy"
+     *</p>
      * @param dateStr     The date string to parse.
      * @param defaultTime The default time to use if the date string does not include a time component.
-     * @return A {@link LocalDateTime} object representing the parsed date and time
+     * @return A {@link LocalDateTime} object representing the parsed date and time or null if the format is
+     * unsupported.
      */
     public LocalDateTime parseDate(String dateStr, LocalTime defaultTime) {
         try {
