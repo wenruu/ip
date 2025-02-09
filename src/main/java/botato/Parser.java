@@ -1,9 +1,18 @@
+/**
+ * The parser class takes a user input string and returns a {@Link Command} object.
+ */
 package botato;
 
 import botato.command.*;
 import botato.exception.InvalidCommandException;
 
 public class Parser {
+    /**
+     * Parses user input string and returns relevant command.
+     * If input string is not a valid command, throws {@link InvalidCommandException}.
+     * @param cmd is user input read by {@link Ui#readCommand()}.
+     * @return {@link Command} object based on input.
+     */
     public static Command parse(String cmd) {
         if (cmd.equals("bye")) {
             // Save data and exit chatbot

@@ -4,8 +4,18 @@ import botato.task.Task;
 
 import java.io.*;
 import java.util.ArrayList;
-
+/**
+ * Manages storage-related methods. It offers a load functionality that loads a text file containing
+ * a serialized ArrayList containing Task data, if the file exists. It offers a save functionality that creates a new
+ * save file if it does not exist yet, or overwrites the existing file to serialize and save an ArrayList containing
+ * Task data.
+ */
 public class Storage {
+    /**
+     * Deserializes data from the data.txt file if it exists into an ArrayList.
+     * Returns new ArrayList instead if the file is not found or another error is encountered.
+     * @return ArrayList containing saved {@link Task}s.
+     */
     public static ArrayList<Task> load() {
         try (FileInputStream fileIn = new FileInputStream("./data/data.txt");
              ObjectInputStream in = new ObjectInputStream(fileIn)) {
@@ -20,6 +30,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if a data directory exists, and creates one if it does not.
+     * Serializes and saves taskArrayList into './data/data.txt'.
+     * @param taskArrayList containing tasks to be saved locally.
+     */
     public static void save(ArrayList<Task> taskArrayList) {
         String directoryPath = "./data/";
         File directory = new File(directoryPath);
