@@ -1,5 +1,10 @@
 package botato;
 
+<<<<<<< HEAD
+=======
+import botato.exception.KeywordNotFoundException;
+import botato.exception.SameStatusException;
+>>>>>>> branch-A-CodingStandard
 import botato.task.Task;
 
 import java.util.ArrayList;
@@ -67,7 +72,27 @@ public class TaskList {
     }
 
     /**
-     * Saves task list.
+     * Finds a specified keyword among all the tasks in taskArrayList.
+     *
+     * @param keyword String to search among current tasks.
+     */
+    public void find(String keyword) {
+        ArrayList<Task> temp = new ArrayList<>();
+        taskArrayList.forEach(task -> {
+            if (task.toString().contains(keyword)) {
+                temp.add(task);
+            }
+        });
+        if (temp.isEmpty()) {
+            throw new KeywordNotFoundException();
+        }
+        System.out.println("Here are your tasks containing the keyword:");
+        IntStream.range(0, temp.size())
+                .forEach(i -> System.out.println((i + 1) + "." + temp.get(i)));
+    }
+
+    /**
+     * Interacts with {@link Storage} to save taskArrayList to local memory.
      */
     public void save() {
         Storage.save(taskArrayList);
