@@ -1,9 +1,5 @@
 package botato.task;
 
-import botato.exception.InvalidDateTimeFormatException;
-import botato.exception.MissingDescriptionException;
-import botato.exception.MissingParamException;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -20,16 +16,16 @@ import java.time.format.DateTimeFormatter;
  * is the part between the "/from" and "/to" keywords, and the end time is the part after
  * the "/to" keyword.
  * <p>
- * Example usage:
- * <pre>
- * Event event = new Event("event Team meeting /from 2023-10-31 2pm /to 2023-10-31 4pm");
- * System.out.println(event); // Outputs: "[ ] Event: Team meeting (from 2023-10-31 2pm to 2023-10-31 4pm)"
- * </pre>
  */
 public class Event extends Task {
     public final LocalDateTime from;
     public final LocalDateTime to;
 
+    /**
+     * The Event task initializes with an input command string from the user, and extracts the relevant parameters
+     * from it.
+     * @param cmd input string to extract description, start and end times from.
+     */
     public Event(String cmd) {
         String fromStr = cmd.substring(cmd.indexOf("/from") + 5, cmd.indexOf("/to")).strip();
         String toStr = cmd.substring(cmd.indexOf("/to") + 3).strip();

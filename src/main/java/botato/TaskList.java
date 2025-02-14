@@ -1,10 +1,10 @@
 package botato;
 
-import botato.exception.KeywordNotFoundException;
-import botato.task.Task;
-
 import java.util.ArrayList;
 import java.util.stream.IntStream;
+
+import botato.exception.KeywordNotFoundException;
+import botato.task.Task;
 
 /**
  * Manages a list of tasks, providing functionalities to add, delete, update, and display tasks.
@@ -14,7 +14,6 @@ import java.util.stream.IntStream;
 public class TaskList {
     private static ArrayList<Task> taskArrayList;
     public TaskList() {
-        // load data from file into ArrayList 
         taskArrayList = Storage.load();
     }
 
@@ -55,7 +54,8 @@ public class TaskList {
     public void setTaskStatus(int taskNum, boolean status) {
         Task task = taskArrayList.get(taskNum - 1);
         task.complete(status);
-        System.out.println((status ? "Good job! You finished this:\n" : "Aww.. Guess you didn't do this yet:\n") + task);
+        System.out.println((status ? "Good job! You finished this:\n" : "Aww.. Guess you didn't do this yet:\n")
+                + task);
     }
 
     /**

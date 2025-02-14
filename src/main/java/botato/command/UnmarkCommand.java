@@ -3,8 +3,11 @@ package botato.command;
 import botato.TaskList;
 import botato.Ui;
 import botato.exception.InvalidTaskNumberException;
-import botato.exception.NoTaskSelectedException;
 
+/**
+ * This class encapsulates the actions to be performed when an unmark command is parsed from the user input string.
+ * When executed, it marks a command as incomplete based on the index from the user input string.
+ */
 public class UnmarkCommand extends Command {
     private final String cmd;
     public UnmarkCommand(String cmd) {

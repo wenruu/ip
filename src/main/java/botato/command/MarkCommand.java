@@ -3,8 +3,11 @@ package botato.command;
 import botato.TaskList;
 import botato.Ui;
 import botato.exception.InvalidTaskNumberException;
-import botato.exception.NoTaskSelectedException;
 
+/**
+ * This class encapsulates the actions to be performed when a mark command is parsed by the parser.
+ * When executed, it marks a task as complete based on the user's input string.
+ */
 public class MarkCommand extends Command {
     private final String cmd;
 

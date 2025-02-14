@@ -1,11 +1,13 @@
 package botato;
 
-import botato.task.Task;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import botato.task.Task;
+
 public class TaskListTest {
     @Test
     void testTaskListSize() {
@@ -45,7 +47,5 @@ public class TaskListTest {
         tasks.add(new Task());
         Storage.save(tasks);
         TaskList taskList = new TaskList();
-
-        // assertEquals(taskList.setTaskStatus(1, false), 0);
     }
 }

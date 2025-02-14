@@ -1,9 +1,21 @@
 package botato;
 
-import botato.command.*;
-import botato.exception.*;
+import botato.command.Command;
+import botato.command.DeadlineCommand;
+import botato.command.DeleteCommand;
+import botato.command.EventCommand;
+import botato.command.ExitCommand;
+import botato.command.HelpCommand;
+import botato.command.ListCommand;
+import botato.command.MarkCommand;
+import botato.command.TodoCommand;
+import botato.command.UnmarkCommand;
+import botato.exception.InvalidCommandException;
+import botato.exception.InvalidDateTimeFormatException;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserTest {
     @Test

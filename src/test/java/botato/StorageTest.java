@@ -1,11 +1,12 @@
 package botato;
 
-import botato.task.Task;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import botato.task.Task;
 
 public class StorageTest {
     @Test

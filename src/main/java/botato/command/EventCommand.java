@@ -2,11 +2,15 @@ package botato.command;
 
 import botato.TaskList;
 import botato.Ui;
-import botato.exception.MissingParamException;
 import botato.task.Event;
 
+/**
+ * This class encapsulates the actions to perform when an event command string is parsed by {@link botato.Parser}.
+ * It creates a new Event task when executed and adds it to the task, then prints a completion message.
+ */
 public class EventCommand extends Command {
     private final String cmd;
+
     public EventCommand(String cmd) {
         this.cmd = cmd;
     }

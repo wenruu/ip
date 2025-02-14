@@ -1,7 +1,5 @@
 package botato.task;
 
-import botato.exception.MissingDescriptionException;
-
 /**
  * Represents a Todo task, which is a specific type of Task.
  * A Todo task has a description but no additional date or time constraints.

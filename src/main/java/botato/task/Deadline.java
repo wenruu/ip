@@ -1,9 +1,5 @@
 package botato.task;
 
-import botato.exception.InvalidDateTimeFormatException;
-import botato.exception.MissingDescriptionException;
-import botato.exception.MissingParamException;
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -18,15 +14,14 @@ import java.time.format.DateTimeFormatter;
  * The description is the part of the command before the "/by" keyword, and the deadline
  * is the part after the "/by" keyword.
  * <p>
- * Example usage:
- * <pre>
- * Deadline deadline = new Deadline("deadline Submit report /by 2023-10-31");
- * System.out.println(deadline); // Outputs: "[ ] Deadline: Submit report (by: 2023-10-31)"
- * </pre>
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
+    /**
+     * Class initializes using input command string from user.
+     * @param cmd input command string to extract description and deadline from.
+     */
     public Deadline(String cmd) {
         String dateStr = cmd.substring(cmd.indexOf("/by") + 3).strip();
         by = parseDate(dateStr, LocalTime.of(23, 59));
