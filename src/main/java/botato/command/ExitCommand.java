@@ -10,9 +10,10 @@ import botato.Ui;
  */
 public class ExitCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         super.isExit = true;
         tasks.save();
         System.out.println("Hope I helped! See you~");
+        return "Hope I helped! See you~";
     }
 }

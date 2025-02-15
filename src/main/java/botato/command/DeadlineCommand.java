@@ -16,9 +16,10 @@ public class DeadlineCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         Task task = new Deadline(cmd);
         tasks.addTask(task);
         System.out.println("Deadline added: \n" + task);
+        return "Deadline added: \n" + task;
     }
 }

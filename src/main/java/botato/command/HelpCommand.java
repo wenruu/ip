@@ -10,7 +10,7 @@ import botato.Ui;
  */
 public class HelpCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         System.out.println("""
                     Welcome to the help dialogue!
                     Type 'commands' for a full list of commands.
@@ -51,5 +51,6 @@ public class HelpCommand extends Command {
             ui.showLine();
         }
         System.out.println("Welcome back to BOTato! Hope you understand me a bit better now!");
+        return "This function is not available right now!";
     }
 }

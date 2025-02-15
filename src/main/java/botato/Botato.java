@@ -16,29 +16,44 @@ public class Botato {
     public Botato() {
         ui = new Ui();
         tasks = new TaskList();
+        Ui.showWelcome(); // Show welcome message to the user.
     }
 
+    /**
+     * Takes in an input in the form of an user input string and returns a string response.
+     *
+     * @param input string to parse.
+     * @return String response.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input); // Parse the command entered by the user.
+            return c.execute(tasks, ui); // Execute the parsed command, affecting the task list and UI.
+        } catch (BotatoException e) {
+            return e.getMessage(); // Show error message if there's an issue with the command.
+        }
+    }
     /**
      * Runs the bot application by displaying a welcome message, reading user input,
      * parsing commands, and executing the respective actions. The bot continues running until
      * an exit command is received.
      */
     public void run() {
-        ui.showWelcome(); // Show welcome message to the user.
+
         boolean isExit = false;
 
         // Loop that keeps the bot running until the user requests an exit.
         while (!isExit) {
             try {
                 String cmd = ui.readCommand(); // Read the user's command.
-                ui.showLine(); // Display a separator line.
+                Ui.showLine(); // Display a separator line.
                 Command c = Parser.parse(cmd); // Parse the command entered by the user.
                 c.execute(tasks, ui); // Execute the parsed command, affecting the task list and UI.
                 isExit = c.isExit(); // Check if the exit condition is met.
             } catch (BotatoException e) {
                 ui.showError(e.getMessage()); // Show error message if there's an issue with the command.
             } finally {
-                ui.showLine(); // Always show a line separator after command execution.
+                Ui.showLine(); // Always show a line separator after command execution.
             }
         }
     }

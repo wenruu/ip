@@ -18,7 +18,7 @@ public abstract class Command {
      * @param tasks The task list that may be modified during command execution.
      * @param ui The user interface that may be updated based on the command execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui);
+    public abstract String execute(TaskList tasks, Ui ui);
 
     /**
      * Returns whether the command should terminate the bot application.

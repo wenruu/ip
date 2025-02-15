@@ -14,11 +14,11 @@ public class UnmarkCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         int taskNum = Integer.parseInt(cmd.substring(6).strip());
         if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new InvalidTaskNumberException(tasks.size());
         }
-        tasks.setTaskStatus(taskNum, false);
+        return tasks.setTaskStatus(taskNum, false);
     }
 }

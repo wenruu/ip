@@ -16,9 +16,10 @@ public class TodoCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         Task task = new Todo(cmd);
         tasks.addTask(task);
         System.out.println("Todo added:\n" + task);
+        return "Todo added:\n" + task;
     }
 }

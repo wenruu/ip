@@ -15,9 +15,10 @@ public class EventCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         Event task = new Event(cmd);
         tasks.addTask(task);
         System.out.println("Event added:\n" + task);
+        return "Event added: \n" + task;
     }
 }

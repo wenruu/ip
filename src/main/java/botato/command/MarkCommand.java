@@ -16,11 +16,11 @@ public class MarkCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         int taskNum = Integer.parseInt(cmd.substring(4).strip());
         if (taskNum <= 0 || taskNum > tasks.size()) {
             throw new InvalidTaskNumberException(tasks.size());
         }
-        tasks.setTaskStatus(taskNum, true);
+        return tasks.setTaskStatus(taskNum, true);
     }
 }
