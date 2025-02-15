@@ -51,20 +51,24 @@ public class TaskList {
      * @param taskNum to set status.
      * @param status to set task to.
      */
-    public void setTaskStatus(int taskNum, boolean status) {
+    public String setTaskStatus(int taskNum, boolean status) {
         Task task = taskArrayList.get(taskNum - 1);
         task.complete(status);
         System.out.println((status ? "Good job! You finished this:\n" : "Aww.. Guess you didn't do this yet:\n")
                 + task);
+        return (status ? "Good job! You finished this:\n" : "Aww.. Guess you didn't do this yet:\n") + task;
     }
 
     /**
      * Shows the current task list.
      */
-    public void show() {
-        System.out.println(taskArrayList.isEmpty() ? "You have no tasks!" : "Here are your current tasks:");
+    public String show() {
+        StringBuilder response = new StringBuilder();
+        response.append(taskArrayList.isEmpty() ? "You have no tasks!" : "Here are your current tasks:");
         IntStream.range(0, taskArrayList.size())
-                .forEach(i -> System.out.println((i + 1) + "." + taskArrayList.get(i)));
+                .forEach(i -> response.append("\n").append(i + 1).append(".").append(taskArrayList.get(i)));
+        System.out.println(response);
+        return response.toString();
     }
 
     /**
@@ -72,7 +76,7 @@ public class TaskList {
      *
      * @param keyword String to search among current tasks.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         taskArrayList.forEach(task -> {
             if (task.toString().contains(keyword)) {
@@ -82,9 +86,12 @@ public class TaskList {
         if (temp.isEmpty()) {
             throw new KeywordNotFoundException();
         }
-        System.out.println("Here are your tasks containing the keyword:");
+        StringBuilder response = new StringBuilder();
+        response.append("Here are your tasks containing the keyword:");
         IntStream.range(0, temp.size())
-                .forEach(i -> System.out.println((i + 1) + "." + temp.get(i)));
+                .forEach(i -> response.append("\n").append(i + 1).append(".").append(temp.get(i)));
+        System.out.println(response);
+        return response.toString();
     }
 
     /**

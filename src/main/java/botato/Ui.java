@@ -21,7 +21,7 @@ public class Ui {
      * Displays a welcome message to the user when the application starts.
      * The welcome message includes an ASCII art logo and a greeting.
      */
-    public void showWelcome() {
+    public static String showWelcome() {
         String welcomeMessage = """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠴⠒⠋⠉⠉⠉⠉⠙⠒⠲⠤⢴⣤⣄⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⢀⣀⡴⠋⠁⠀⠀⠳⠀⠀⠀⢀⠀⠶⢤⣄⣀⠀⠀⠈⠉⠳⡄⠀
@@ -39,6 +39,7 @@ Welcome to BOTato! How may I help you today?""";
 
         System.out.println(welcomeMessage);
         showLine();
+        return welcomeMessage;
     }
 
     /**
@@ -53,7 +54,7 @@ Welcome to BOTato! How may I help you today?""";
     /**
      * Displays a separator line on the console for formatting.
      */
-    public void showLine() {
+    public static void showLine() {
         String line = "------------------------------------------------------------------------------------------------"
                 + "---------------";
         System.out.println(line);

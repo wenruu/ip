@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         String taskStr = cmd.substring(6).strip(); // Extract desired task number
         int taskNum = Integer.parseInt(taskStr);
         if (taskNum <= 0 || taskNum > tasks.size()) {
@@ -24,5 +24,6 @@ public class DeleteCommand extends Command {
         }
         Task removedTask = tasks.deleteTask(taskNum);
         System.out.println("Task has been successfully removed:\n" + removedTask);
+        return "Task has been successfully removed:\n" + removedTask;
     }
 }

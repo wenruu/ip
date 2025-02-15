@@ -9,7 +9,7 @@ import botato.Ui;
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        tasks.show();
+    public String execute(TaskList tasks, Ui ui) {
+        return tasks.show();
     }
 }

@@ -16,11 +16,11 @@ public class FindCommand extends Command {
         this.cmd = cmd;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         String keyword = cmd.substring(4).strip();
         if (keyword.isBlank()) {
             throw new MissingKeywordException();
         }
-        tasks.find(keyword);
+        return tasks.find(keyword);
     }
 }

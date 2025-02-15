@@ -40,7 +40,7 @@ public class Storage {
      * Serializes and saves taskArrayList into './data/data.txt'.
      * @param taskArrayList containing tasks to be saved locally.
      */
-    public static void save(ArrayList<Task> taskArrayList) {
+    public static String save(ArrayList<Task> taskArrayList) {
         String directoryPath = "./data/";
         File directory = new File(directoryPath);
         if (!directory.exists()) {
@@ -50,8 +50,10 @@ public class Storage {
              ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(taskArrayList);
             System.out.println("Data has been saved!");
+            return "Data has been saved!";
         } catch (Exception e) {
             System.out.println("An error was encountered and your data was unable to be saved...");
+            return "An error was encountered and your data was unable to be saved!";
         }
     }
 }
