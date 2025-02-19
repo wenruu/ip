@@ -11,18 +11,15 @@ import botato.task.Task;
  * input string.
  */
 public class DeleteCommand extends Command {
-    private final String cmd;
-    public DeleteCommand(String cmd) {
-        this.cmd = cmd;
+    private final int taskNumber;
+    public DeleteCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        String taskStr = cmd.substring(6).strip(); // Extract desired task number
-        int taskNum = Integer.parseInt(taskStr);
-        if (taskNum <= 0 || taskNum > tasks.size()) {
-            throw new InvalidTaskNumberException(tasks.size());
-        }
-        Task removedTask = tasks.deleteTask(taskNum);
+        assert taskNumber > 0 : "Task number must be greater than 0.";
+        assert taskNumber <= TaskList.size() : "Task number must be less than or equal to TaskList.size()";
+        Task removedTask = tasks.deleteTask(taskNumber);
         System.out.println("Task has been successfully removed:\n" + removedTask);
         return "Task has been successfully removed:\n" + removedTask;
     }

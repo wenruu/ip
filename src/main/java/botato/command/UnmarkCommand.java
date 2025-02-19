@@ -9,16 +9,14 @@ import botato.exception.InvalidTaskNumberException;
  * When executed, it marks a command as incomplete based on the index from the user input string.
  */
 public class UnmarkCommand extends Command {
-    private final String cmd;
-    public UnmarkCommand(String cmd) {
-        this.cmd = cmd;
+    private int taskNumber;
+    public UnmarkCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        int taskNum = Integer.parseInt(cmd.substring(6).strip());
-        if (taskNum <= 0 || taskNum > tasks.size()) {
-            throw new InvalidTaskNumberException(tasks.size());
-        }
-        return tasks.setTaskStatus(taskNum, false);
+        assert taskNumber > 0 : "Task number must be greater than 0.";
+        assert taskNumber <= TaskList.size() : "Task number must be less than or equal to TaskList.size()";
+        return tasks.setTaskStatus(taskNumber, false);
     }
 }
