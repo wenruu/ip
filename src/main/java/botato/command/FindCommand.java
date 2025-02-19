@@ -10,17 +10,13 @@ import botato.exception.MissingKeywordException;
  * in the given task list. Then, the found tasks (if any) are printed.
  */
 public class FindCommand extends Command {
-    private final String cmd;
+    private final String keyword;
 
-    public FindCommand(String cmd) {
-        this.cmd = cmd;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        String keyword = cmd.substring(4).strip();
-        if (keyword.isBlank()) {
-            throw new MissingKeywordException();
-        }
         return tasks.find(keyword);
     }
 }

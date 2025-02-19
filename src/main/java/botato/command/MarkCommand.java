@@ -9,18 +9,16 @@ import botato.exception.InvalidTaskNumberException;
  * When executed, it marks a task as complete based on the user's input string.
  */
 public class MarkCommand extends Command {
-    private final String cmd;
+    private final int taskNumber;
 
-    public MarkCommand(String cmd) {
-        this.cmd = cmd;
+    public MarkCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     @Override
     public String execute(TaskList tasks, Ui ui) {
-        int taskNum = Integer.parseInt(cmd.substring(4).strip());
-        if (taskNum <= 0 || taskNum > tasks.size()) {
-            throw new InvalidTaskNumberException(tasks.size());
-        }
-        return tasks.setTaskStatus(taskNum, true);
+        assert taskNumber > 0 : "Task number must be greater than 0.";
+        assert taskNumber <= TaskList.size() : "Task number must be less than or equal to TaskList.size()";
+        return tasks.setTaskStatus(taskNumber, true);
     }
 }

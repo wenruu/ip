@@ -31,6 +31,8 @@ public class Botato {
             return c.execute(tasks, ui); // Execute the parsed command, affecting the task list and UI.
         } catch (BotatoException e) {
             return e.getMessage(); // Show error message if there's an issue with the command.
+        } catch (Exception e) {
+            return "An error occurred: " + e.getMessage();
         }
     }
     /**
