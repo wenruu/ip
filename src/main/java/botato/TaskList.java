@@ -12,7 +12,7 @@ import botato.task.Task;
  * tasks as complete or incomplete and provides a method to display all tasks in a formatted manner.
  */
 public class TaskList {
-    private static ArrayList<Task> taskArrayList;
+    private static ArrayList<Task> taskArrayList = new ArrayList<>();
     public TaskList() {
         taskArrayList = Storage.load();
     }
@@ -22,7 +22,7 @@ public class TaskList {
      *
      * @return number of elements in taskArrayList.
      */
-    public int size() {
+    public static int size() {
         return taskArrayList.size();
     }
 
