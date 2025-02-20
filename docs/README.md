@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="../src/main/resources/css/dialog-box.css">
-
 # Botato guide
 
 This document outlines the commands available for managing tasks, including adding, marking, unmarking, deleting, and finding tasks. Supported date formats are also listed.
