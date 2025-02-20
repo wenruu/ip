@@ -1,5 +1,7 @@
 package botato;
 
+import java.util.Objects;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Objects;
 
 /**
  * Controller for the main GUI.
@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private final Image botatoImage =
             new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Botato.png")));
 
+    /**
+     * Initializes the scroll pane and displays a welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
