@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="../src/main/resources/css/dialog-box.css">
+<link rel="stylesheet" href="style.css">
 
 # Botato guide
 
