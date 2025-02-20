@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="style.css">
+<div class = "text-panel">
 
 # Botato guide
 
@@ -109,3 +110,5 @@ The following date formats are supported for deadlines and events:
     - Example: `31 Dec 2023`
 
 ---
+
+</div>
