@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -27,9 +28,9 @@ public class MainWindow extends AnchorPane {
     private Botato botato;
 
     private final Image userImage =
-            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/User.png")));
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/user.png")));
     private final Image botatoImage =
-            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/Botato.png")));
+            new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/botato.png")));
 
     /**
      * Initializes the scroll pane and displays a welcome message.

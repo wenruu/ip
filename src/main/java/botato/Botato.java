@@ -33,6 +33,9 @@ public class Botato {
             return e.getMessage(); // Show error message if there's an issue with the command.
         } catch (Exception e) {
             return "An error occurred: " + e.getMessage();
+        } finally {
+            // Ensures tasks are saved even if user force quits the application.
+            tasks.save();
         }
     }
     /**
@@ -41,9 +44,7 @@ public class Botato {
      * an exit command is received.
      */
     public void run() {
-
         boolean isExit = false;
-
         // Loop that keeps the bot running until the user requests an exit.
         while (!isExit) {
             try {

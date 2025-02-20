@@ -1,5 +1,7 @@
 package botato.task;
 
+import botato.exception.EndDateBeforeStartException;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +33,10 @@ public class Event extends Task {
         String toStr = cmd.substring(cmd.indexOf("/to") + 3).strip();
         this.from = parseDate(fromStr, LocalTime.of(0, 0));
         this.to = parseDate(toStr, LocalTime.of(23, 59));
+        // Throw exception if the end date is before the start date.
+        if (this.to.isBefore(this.from)) {
+            throw new EndDateBeforeStartException();
+        }
         description = cmd.substring(5, cmd.indexOf('/')).strip();
     }
 
