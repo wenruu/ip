@@ -22,19 +22,7 @@ public class Ui {
      * The welcome message includes an ASCII art logo and a greeting.
      */
     public static String showWelcome() {
-        String welcomeMessage = """
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⠤⠴⠒⠋⠉⠉⠉⠉⠙⠒⠲⠤⢴⣤⣄⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⢀⣀⡴⠋⠁⠀⠀⠳⠀⠀⠀⢀⠀⠶⢤⣄⣀⠀⠀⠈⠉⠳⡄⠀
-⠀⠀⠀⢀⠴⠊⠁⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠘⠆⠘⡄
-⠀⢀⠜⠁⢠⠄⢀⣀⣑⣀⡀⠀⠀⠀⠀⠀⡤⠤⠤⠤⡄⠀⠀⢀⠀⠀⠀⡤⠀⢱
-⢀⠎⠀⠀⠈⠀⢸⠠⠤⠄⢹⠀⠀⠀⠀⠀⡇⠤⠤⠄⠇⠀⠀⠀⠃⠀⠀⠀⠀⢸
-⡎⠀⠀⠀⠀⠀⠨⠉⠉⠉⠉⠀⠀⡆⠀⠀⠉⠉⠉⠩⠃⠀⠀⠀⠠⠄⢀⣀⣠⠏
-⣧⠀⠈⡆⠀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠠⢀⣀⠀⠀⠀⠀⠀⠀⣨⠁⠀
-⡟⠄⠀⢸⡄⠀⠀⠀⠀⠈⢯⡉⠉⠈⠉⠉⠉⠉⡝⠈⠛⠃⠀⠀⠀⣠⡾⠃⠀⠀
-⢱⡈⠀⠀⠁⠀⠀⠀⠀⠀⠀⠉⠒⠒⠐⠒⠒⠊⠁⠀⢀⣠⠀⣀⡴⠋⠀⠀⠀⠀
-⠀⠑⢤⣀⠀⠀⣖⡆⠀⠀⠀⢤⡤⣀⣀⠰⠄⠀⠀⠀⠀⢀⣠⠏⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠈⠙⠒⠢⠤⠤⣄⣀⣠⣤⣬⠶⠶⠦⠤⠶⠖⠚⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-Welcome to BOTato! How may I help you today?""";
+        String welcomeMessage = "Welcome to BOTato! How may I help you today?";
         showLine();
 
         System.out.println(welcomeMessage);
