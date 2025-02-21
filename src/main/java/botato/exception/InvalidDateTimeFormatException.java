@@ -5,6 +5,6 @@ package botato.exception;
  */
 public class InvalidDateTimeFormatException extends BotatoException {
     public InvalidDateTimeFormatException() {
-        super("Please check your date format(s)! Type 'help' to learn more.");
+        super("I didn't catch that date... Say 'help' if you don't know how you should type it!");
     }
 }

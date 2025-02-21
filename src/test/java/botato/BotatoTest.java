@@ -1,74 +1,111 @@
 package botato;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BotatoTest {
+class BotatoTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
+    private Botato botato;
 
     @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
+    void setUp() {
+        // Initialize Botato with real dependencies
+        botato = new Botato();
+        TaskList.initialize(0);
     }
 
     @Test
-    public void testBotatoWelcomeMessage() {
-        new Botato();
-        String expectedOutput = "Hello! I'm Botato.\nWhat can I do for you?\n";
-        assertTrue(outContent.toString().contains(expectedOutput));
+    void testGetResponse_AddTodo() {
+        // Arrange
+        String input = "todo Buy groceries";
+
+        // Act
+        String response = botato.getResponse(input);
+
+        // Assert
+        assertEquals("Todo added:\n[ ] Todo: Buy groceries", response);
     }
 
     @Test
-    public void testBotatoExitCommand() {
-        Botato botato = new Botato();
-        // Simulate user input for the "bye" command
-        ByteArrayInputStream in = new ByteArrayInputStream("bye".getBytes());
-        System.setIn(in);
+    void testGetResponse_InvalidCommand() {
+        // Arrange
+        String input = "invalid command";
 
-        botato.run();
+        // Act
+        String response = botato.getResponse(input);
 
-        String expectedOutput = "Bye. Hope to see you again soon!\n";
-        assertTrue(outContent.toString().contains(expectedOutput));
+        // Assert
+        assertEquals("I don't understand that, I'm just a potato...\n"
+                        + "Say 'help' to see what I learnt to do so far!"
+                , response);
     }
 
     @Test
-    public void testBotatoAddTodoCommand() {
-        Botato botato = new Botato();
-        // Simulate user input for adding a todo task
-        ByteArrayInputStream in = new ByteArrayInputStream("todo Read book".getBytes());
-        System.setIn(in);
+    void testGetResponse_ListTasks() {
+        // Arrange
+        // Add some tasks first
+        botato.getResponse("todo potatoes");
+        botato.getResponse("deadline buy potatoes /by 2069-06-09 23:59");
+        botato.getResponse("event potato festival /from 1969-09-06 00:00 /to 2069-09-06 23:59");
+        botato.getResponse("todo Buy groceries");
 
-        botato.run();
+        String listInput = "list";
 
-        String expectedOutput = "Got it. I've added this task:\n[T][ ] Read book\n";
-        assertTrue(outContent.toString().contains(expectedOutput));
+        // Act
+        String response = botato.getResponse(listInput);
+
+        // Assert
+        String expectedOutput = """
+                Here are your current tasks:
+                1.[ ] Todo: potatoes
+                2.[ ] Deadline: buy potatoes (by: 09 Jun 2069 23:59)
+                3.[ ] Event: potato festival (from 06 Sep 1969 00:00 to 06 Sep 2069 23:59)
+                4.[ ] Todo: Buy groceries""";
+        assertEquals(expectedOutput, response);
     }
 
     @Test
-    public void testBotatoInvalidCommand() {
-        Botato botato = new Botato();
-        // Simulate user input for an invalid command
-        ByteArrayInputStream in = new ByteArrayInputStream("invalid command".getBytes());
-        System.setIn(in);
+    void testGetResponse_MarkTaskAsDone() {
+        // Arrange
+        // Add a task first
+        botato.getResponse("todo potatoes");
 
-        botato.run();
+        String markInput = "mark 1";
 
-        String expectedOutput = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-        assertTrue(outContent.toString().contains(expectedOutput));
+        // Act
+        String response = botato.getResponse(markInput);
+
+        // Assert
+        assertEquals("Good job! You finished this:\n[X] Todo: potatoes", response);
     }
 
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setIn(System.in);
+    @Test
+    void testGetResponse_UnmarkTask() {
+        // Arrange
+        // Add and mark a task first
+        botato.getResponse("todo potatoes");
+        botato.getResponse("mark 1");
+
+        String unmarkInput = "unmark 1";
+
+        // Act
+        String response = botato.getResponse(unmarkInput);
+
+        // Assert
+        assertEquals("Aww.. Guess you didn't do this yet:\n[ ] Todo: potatoes", response);
+    }
+
+    @Test
+    void testGetResponse_ListTasks_EmptyList() {
+        // Arrange
+        String listInput = "list";
+
+        // Act
+        String response = botato.getResponse(listInput);
+
+        // Assert
+        assertEquals("You have no tasks!", response);
     }
 }

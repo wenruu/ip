@@ -8,6 +8,6 @@ public class InvalidCommandException extends BotatoException {
      * Adds a custom error message to print out.
      */
     public InvalidCommandException() {
-        super("Make sure your command is valid and formatted correctly! Type 'help' to learn more.");
+        super("I don't understand that, I'm just a potato...\nSay 'help' to see what I learnt to do so far!");
     }
 }

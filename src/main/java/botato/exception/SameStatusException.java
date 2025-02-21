@@ -5,6 +5,6 @@ package botato.exception;
  */
 public class SameStatusException extends BotatoException {
     public SameStatusException(boolean status) {
-        super(status ? "This task has already been marked as completed!" : "This task has not been completed yet!");
+        super(status ? "Dummy, you've already done this task!" : "Yes, you haven't done this task yet...");
     }
 }

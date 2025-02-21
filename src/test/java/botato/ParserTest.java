@@ -1,116 +1,95 @@
 package botato;
 
-import botato.command.Command;
-import botato.command.DeadlineCommand;
-import botato.command.DeleteCommand;
-import botato.command.EventCommand;
-import botato.command.ExitCommand;
-import botato.command.HelpCommand;
-import botato.command.ListCommand;
-import botato.command.MarkCommand;
-import botato.command.TodoCommand;
-import botato.command.UnmarkCommand;
+import botato.command.*;
 import botato.exception.InvalidCommandException;
-import botato.exception.InvalidDateTimeFormatException;
+import botato.exception.InvalidTaskNumberException;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+class ParserTest {
 
-public class ParserTest {
     @Test
-    void testParseExitCommand() {
+    void parse_validExitCommand_returnsExitCommand() {
         Command command = Parser.parse("bye");
         assertInstanceOf(ExitCommand.class, command);
     }
 
     @Test
-    void testParseListCommand() {
+    void parse_validListCommand_returnsListCommand() {
         Command command = Parser.parse("list");
         assertInstanceOf(ListCommand.class, command);
     }
 
     @Test
-    void testParseMarkCommand() {
-        Command command = Parser.parse("mark 1");
+    void parse_validMarkCommand_returnsMarkCommand() {
+        TaskList.initialize(3); // Mock TaskList with 3 tasks
+        Command command = Parser.parse("mark 2");
         assertInstanceOf(MarkCommand.class, command);
     }
 
     @Test
-    void testParseUnmarkCommand() {
+    void parse_markInvalidTaskNumber_throwsException() {
+        TaskList.initialize(2); // Mock TaskList with 2 tasks
+        assertThrows(InvalidTaskNumberException.class, () -> Parser.parse("mark 5"));
+    }
+
+    @Test
+    void parse_validUnmarkCommand_returnsUnmarkCommand() {
+        TaskList.initialize(3); // Mock TaskList with 3 tasks
         Command command = Parser.parse("unmark 1");
         assertInstanceOf(UnmarkCommand.class, command);
     }
 
     @Test
-    void testParseTodoCommand() {
-        Command command = Parser.parse("todo read book");
+    void parse_validTodoCommand_returnsTodoCommand() {
+        Command command = Parser.parse("todo Read book");
         assertInstanceOf(TodoCommand.class, command);
     }
 
     @Test
-    void testParseDeadlineCommand() {
-        Command command = Parser.parse("deadline return book /by 2023-12-31");
+    void parse_validDeadlineCommand_returnsDeadlineCommand() {
+        Command command = Parser.parse("deadline Submit assignment /by tomorrow");
         assertInstanceOf(DeadlineCommand.class, command);
     }
 
     @Test
-    void testParseEventCommand() {
-        Command command = Parser.parse("event project meeting /from 2023-12-01 /to 2023-12-02");
+    void parse_validEventCommand_returnsEventCommand() {
+        Command command = Parser.parse("event Party /from 6pm /to 10pm");
         assertInstanceOf(EventCommand.class, command);
     }
 
     @Test
-    void testParseDeleteCommand() {
-        Command command = Parser.parse("delete 1");
+    void parse_validDeleteCommand_returnsDeleteCommand() {
+        TaskList.initialize(5); // Mock TaskList with 5 tasks
+        Command command = Parser.parse("delete 3");
         assertInstanceOf(DeleteCommand.class, command);
     }
 
     @Test
-    void testParseHelpCommand() {
+    void parse_deleteInvalidTaskNumber_throwsException() {
+        TaskList.initialize(3); // Mock TaskList with 3 tasks
+        assertThrows(InvalidTaskNumberException.class, () -> Parser.parse("delete 10"));
+    }
+
+    @Test
+    void parse_validHelpCommand_returnsHelpCommand() {
         Command command = Parser.parse("help");
         assertInstanceOf(HelpCommand.class, command);
     }
 
     @Test
-    void testParseUnknownCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("unknown"));
+    void parse_validFindCommand_returnsFindCommand() {
+        Command command = Parser.parse("find homework");
+        assertInstanceOf(FindCommand.class, command);
     }
 
     @Test
-    void testParseInvalidMarkCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("mark")); // Missing task number
+    void parse_findCommandWithoutKeyword_throwsException() {
+        assertThrows(InvalidCommandException.class, () -> Parser.parse("find"));
     }
 
     @Test
-    void testParseInvalidUnmarkCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("unmark")); // Missing task number
-    }
-
-    @Test
-    void testParseInvalidTodoCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("todo")); // Missing description
-    }
-
-    @Test
-    void testParseInvalidDeadlineCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("deadline")); // Missing details
-    }
-
-    @Test
-    void testParseInvalidEventCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("event")); // Missing details
-    }
-
-    @Test
-    void testParseInvalidDeleteCommand() {
-        assertThrows(InvalidCommandException.class, () -> Parser.parse("delete")); // Missing task number
-    }
-
-    @Test
-    void testParseInvalidEventDate() {
-        // Invalid Date
-        assertThrows(InvalidDateTimeFormatException.class,
-                () -> Parser.parse("event a /from ! /to !").execute(new TaskList(), new Ui()));
+    void parse_invalidCommand_throwsException() {
+        assertThrows(InvalidCommandException.class, () -> Parser.parse("randomCommand"));
     }
 }

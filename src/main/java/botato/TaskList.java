@@ -27,6 +27,18 @@ public class TaskList {
     }
 
     /**
+     * Use for automated testing.
+     *
+     * @param size to initialize ArrayList.
+     */
+    public static void initialize(int size) {
+        taskArrayList.clear();
+        for (int i = 0; i < size; i++) {
+            taskArrayList.add(new Task());
+        }
+    }
+
+    /**
      * Adds a specified task to the task list.
      *
      * @param task to add to taskArrayList.
@@ -79,7 +91,7 @@ public class TaskList {
     public String find(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         taskArrayList.forEach(task -> {
-            if (task.toString().contains(keyword)) {
+            if (task.toString().toLowerCase().contains(keyword.toLowerCase())) {
                 temp.add(task);
             }
         });

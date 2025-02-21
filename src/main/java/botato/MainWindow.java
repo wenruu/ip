@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * Controller for the main GUI.
@@ -75,8 +77,11 @@ public class MainWindow extends AnchorPane {
         if (Objects.equals(response, "Hope I helped! See you~")) {
             Platform.exit();
         }
-        if (Objects.equals(response, "Opening my guide in a new window...")) {  // Fixed typo here
-            openMarkdownViewer("docs/README.md");
+        // Opens the user guide after a short delay
+        if (Objects.equals(response, "Opening my guide in a new window...")) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.3));
+            pause.setOnFinished(event -> {openMarkdownViewer("docs/README.md");});
+            pause.play();
         }
     }
 
@@ -95,8 +100,10 @@ public class MainWindow extends AnchorPane {
             WebView webView = new WebView();
             webView.getEngine().loadContent(htmlContent);
 
-            Scene scene = new Scene(webView, 800, 600);
+            Scene scene = new Scene(webView, 600, 600);
             Stage stage = new Stage();
+            stage.setX(0);
+            stage.setY(0);
             stage.setScene(scene);
             stage.setTitle("Botato Guide");
             stage.show();

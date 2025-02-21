@@ -10,7 +10,7 @@ public class InvalidTaskNumberException extends BotatoException {
      * @param size is used to show a more interactive error message to the user.
      */
     public InvalidTaskNumberException(int size) {
-        super("Invalid task number! "
-                + (size == 0 ? "You have no tasks." : "Choose an integer between 1 and " + size + "."));
+        super("That task number didn't look quite right... "
+                + (size == 0 ? "You have no tasks." : "You only have " + size + " task(s)!"));
     }
 }

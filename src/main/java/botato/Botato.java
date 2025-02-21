@@ -11,6 +11,16 @@ public class Botato {
     private final Ui ui;
 
     /**
+     * Constructor used for testing.
+     * @param ui Mock UI to test with
+     * @param taskList Mock tasklist to test with
+     * @param parser
+     */
+    public Botato(Ui ui, TaskList taskList, Parser parser) {
+        this.ui = ui;
+        this.tasks = taskList;
+    }
+    /**
      * Constructs a new Botato instance with an empty task list and initializes the user interface.
      */
     public Botato() {
@@ -30,8 +40,10 @@ public class Botato {
             Command c = Parser.parse(input); // Parse the command entered by the user.
             return c.execute(tasks, ui); // Execute the parsed command, affecting the task list and UI.
         } catch (BotatoException e) {
+            System.out.println(e.getMessage());
             return e.getMessage(); // Show error message if there's an issue with the command.
         } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
             return "An error occurred: " + e.getMessage();
         } finally {
             // Ensures tasks are saved even if user force quits the application.
