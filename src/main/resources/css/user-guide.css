@@ -1,0 +1,60 @@
+/* General Styles */
+.guide-content {
+    -fx-padding: 20;
+    -fx-font-family: "Arial";
+    -fx-wrap-text: true;
+    -fx-background-image: url("../images/more_transparent_background.png");
+    -fx-background-size: 300px;
+    -fx-background-repeat: repeat;
+}
+
+/* Title Label */
+.title-label {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 0;
+    -fx-wrap-text: true;
+}
+
+/* Section Labels */
+.section-label {
+    -fx-font-size: 24px;
+    -fx-underline: true;
+    -fx-font-weight: bold;
+    -fx-padding: 10 0 5 0;
+    -fx-wrap-text: true;
+}
+
+/* Subsection Labels */
+.subsection-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 5 0 5 0;
+    -fx-wrap-text: true;
+}
+
+/* Command Labels */
+.command-label {
+    -fx-font-size: 15px;
+    -fx-padding: 2 0 2 0;
+    -fx-wrap-text: true;
+}
+
+/* Example Labels */
+.example-label {
+    -fx-font-size: 15px;
+    -fx-padding: 2 0 2 20;
+    -fx-wrap-text: true;
+}
+
+/* Code Labels */
+.code-label {
+    -fx-font-size: 15px;
+    -fx-font-family: "Monospace";
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #d0d0d0;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-padding: 2;
+    -fx-wrap-text: true;
+}

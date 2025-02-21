@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane fx:id="scrollPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="botato.UserGuideController">
+    <content>
+        <VBox fx:id="contentBox" spacing="10" styleClass="guide-content">
+            <!-- Title -->
+            <Label text="Botato User Guide" styleClass="title-label"/>
+
+            <!-- Commands Section -->
+            <Label text="Commands" styleClass="section-label"/>
+
+            <!-- Basic Commands -->
+            <Label text="Basic Commands" styleClass="subsection-label"/>
+            <Label text="- bye: Exits the application." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > bye" styleClass="code-label"/>
+
+            <Label text="- list: Lists all tasks." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > list" styleClass="code-label"/>
+
+            <Label text="- help: Displays the list of available commands." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > help" styleClass="code-label"/>
+
+            <!-- Task Modification Commands -->
+            <Label text="Task Modification Commands" styleClass="subsection-label"/>
+            <Label text="- mark [task number]: Marks a task as completed." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > mark 2" styleClass="code-label"/>
+
+            <Label text="- unmark [task number]: Unmarks a completed task." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > unmark 2" styleClass="code-label"/>
+
+            <Label text="- delete [task number]: Deletes a task." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > delete 3" styleClass="code-label"/>
+
+            <!-- Task Creation Commands -->
+            <Label text="Task Creation Commands" styleClass="subsection-label"/>
+            <Label text="- todo [description]: Adds a todo task with the specified description." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > todo Read a book" styleClass="code-label"/>
+
+            <Label text="- deadline [description] /by [date]: Adds a deadline task with the specified description and due date." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > deadline Finish project /by 2023-12-15 18:00" styleClass="code-label"/>
+
+            <Label text="- event [description] /from [date] /to [date]: Adds an event task with the specified description, start date, and end date." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > event Team workshop /from 2023-11-20 09:00 /to 2023-11-20 17:00" styleClass="code-label"/>
+
+            <!-- Search Command -->
+            <Label text="Search Command" styleClass="subsection-label"/>
+            <Label text="- find [keyword(s)]: Searches for tasks containing the specified keyword(s)." styleClass="command-label"/>
+            <Label text="  Example:" styleClass="example-label"/>
+            <Label text="  > find workshop" styleClass="code-label"/>
+
+            <!-- Supported Date Formats -->
+            <Label text="Supported Date Formats" styleClass="section-label"/>
+            <Label text="The following date formats are supported for deadlines and events:" styleClass="command-label"/>
+
+            <!-- ISO Formats -->
+            <Label text="ISO Formats" styleClass="subsection-label"/>
+            <Label text="- yyyy-MM-dd HH:mm:ss" styleClass="command-label"/>
+            <Label text="  Example: 2023-12-31 23:59:59" styleClass="example-label"/>
+
+            <Label text="- yyyy-MM-dd HH:mm" styleClass="command-label"/>
+            <Label text="  Example: 2023-12-31 23:59" styleClass="example-label"/>
+
+            <Label text="- yyyy-MM-dd" styleClass="command-label"/>
+            <Label text="  Example: 2023-12-31" styleClass="example-label"/>
+
+            <!-- Slash Formats -->
+            <Label text="Slash Formats" styleClass="subsection-label"/>
+            <Label text="- dd/MM/yyyy HH:mm:ss" styleClass="command-label"/>
+            <Label text="  Example: 31/12/2023 23:59:59" styleClass="example-label"/>
+
+            <Label text="- dd/MM/yyyy HH:mm" styleClass="command-label"/>
+            <Label text="  Example: 31/12/2023 23:59" styleClass="example-label"/>
+
+            <Label text="- dd/MM/yyyy" styleClass="command-label"/>
+            <Label text="  Example: 31/12/2023" styleClass="example-label"/>
+
+            <Label text="- dd/MM/yy HH:mm:ss" styleClass="command-label"/>
+            <Label text="  Example: 31/12/23 23:59:59" styleClass="example-label"/>
+
+            <Label text="- dd/MM/yy HH:mm" styleClass="command-label"/>
+            <Label text="  Example: 31/12/23 23:59" styleClass="example-label"/>
+
+            <Label text="- dd/MM/yy" styleClass="command-label"/>
+            <Label text="  Example: 31/12/23" styleClass="example-label"/>
+
+            <!-- Text Formats -->
+            <Label text="Text Formats" styleClass="subsection-label"/>
+            <Label text="- dd MMM yyyy HH:mm:ss" styleClass="command-label"/>
+            <Label text="  Example: 31 Dec 2023 23:59:59" styleClass="example-label"/>
+
+            <Label text="- dd MMM yyyy HH:mm" styleClass="command-label"/>
+            <Label text="  Example: 31 Dec 2023 23:59" styleClass="example-label"/>
+
+            <Label text="- dd MMM yyyy" styleClass="command-label"/>
+            <Label text="  Example: 31 Dec 2023" styleClass="example-label"/>
+        </VBox>
+    </content>
+</ScrollPane>

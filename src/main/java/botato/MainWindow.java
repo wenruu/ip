@@ -11,6 +11,8 @@ import java.util.Scanner;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -19,12 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ast.Node;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
  * Controller for the main GUI.
@@ -90,52 +87,27 @@ public class MainWindow extends AnchorPane {
         }
         // Opens the user guide after a short delay
         if (Objects.equals(response, "Opening my guide in a new window...")) {
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.3));
-            pause.setOnFinished(event -> {openMarkdownViewer();});
-            pause.play();
+            try {
+                // Load the FXML file
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/UserGuide.fxml"));
+                ScrollPane root = loader.load();
+
+                // Create the scene
+                Scene scene = new Scene(root, 600, 600);
+
+                // Apply the CSS file
+                scene.getStylesheets().add(getClass().getResource("/css/user-guide.css").toExternalForm());
+
+                // Create a new stage for the User Guide
+                Stage userGuideStage = new Stage();
+                userGuideStage.setTitle("Botato User Guide");
+                userGuideStage.setX(0);
+                userGuideStage.setY(0);
+                userGuideStage.setScene(scene);
+                userGuideStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    private void openMarkdownViewer() {
-        // Use the class loader to access the resource
-        InputStream inputStream = MainWindow.class.getClassLoader()
-                .getResourceAsStream("docs/README.md");
-
-        if (inputStream == null) {
-            System.err.println("Markdown file not found in resources!");
-            return;
-        }
-
-        String markdownContent = readMarkdownFile(inputStream);
-        String htmlContent = convertMarkdownToHtml(markdownContent);
-
-        Platform.runLater(() -> {
-            WebView webView = new WebView();
-            webView.getEngine().loadContent(htmlContent);
-
-            Scene scene = new Scene(webView, 600, 600);
-            Stage stage = new Stage();
-            stage.setX(0);
-            stage.setY(0);
-            stage.setScene(scene);
-            stage.setTitle("Botato Guide");
-            stage.show();
-        });
-    }
-
-    private String readMarkdownFile(InputStream inputStream) {
-        try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8)) {
-            return scanner.useDelimiter("\\A").next();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "Error loading file.";
-        }
-    }
-
-    private String convertMarkdownToHtml(String markdown) {
-        Parser parser = Parser.builder().build();
-        HtmlRenderer renderer = HtmlRenderer.builder().build();
-        Node document = parser.parse(markdown);
-        return renderer.render(document);
     }
 }
