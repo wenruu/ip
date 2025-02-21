@@ -1,9 +1,12 @@
 package botato;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.Scanner;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -53,6 +56,14 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getBotatoDialog(Ui.showWelcome(), botatoImage)
         );
+        try (InputStream inputStream = MainWindow.class.getClassLoader().getResourceAsStream("docs/README.md")) {
+            if (inputStream == null) {
+                System.err.println("File not found!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /** Injects the Botato instance */
@@ -80,20 +91,22 @@ public class MainWindow extends AnchorPane {
         // Opens the user guide after a short delay
         if (Objects.equals(response, "Opening my guide in a new window...")) {
             PauseTransition pause = new PauseTransition(Duration.seconds(0.3));
-            pause.setOnFinished(event -> {openMarkdownViewer("docs/README.md");});
+            pause.setOnFinished(event -> {openMarkdownViewer();});
             pause.play();
         }
     }
 
-    private void openMarkdownViewer(String filePath) {
-        Path filepath = Path.of(filePath);
+    private void openMarkdownViewer() {
+        // Use the class loader to access the resource
+        InputStream inputStream = MainWindow.class.getClassLoader()
+                .getResourceAsStream("docs/README.md");
 
-        if (!Files.exists(filepath)) {
-            System.err.println("Markdown file not found: " + filePath);
+        if (inputStream == null) {
+            System.err.println("Markdown file not found in resources!");
             return;
         }
 
-        String markdownContent = readMarkdownFile(filepath);
+        String markdownContent = readMarkdownFile(inputStream);
         String htmlContent = convertMarkdownToHtml(markdownContent);
 
         Platform.runLater(() -> {
@@ -109,10 +122,11 @@ public class MainWindow extends AnchorPane {
             stage.show();
         });
     }
-    private String readMarkdownFile(Path filePath) {
-        try {
-            return Files.readString(filePath);
-        } catch (IOException e) {
+
+    private String readMarkdownFile(InputStream inputStream) {
+        try (Scanner scanner = new Scanner(inputStream, StandardCharsets.UTF_8)) {
+            return scanner.useDelimiter("\\A").next();
+        } catch (Exception e) {
             e.printStackTrace();
             return "Error loading file.";
         }
