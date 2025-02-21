@@ -29,10 +29,10 @@ public class Parser {
      */
     public static Command parse(String cmd) {
         assert cmd != null : "Input cannot be null";
-        if (cmd.equals("bye")) {
+        if (cmd.strip().equals("bye")) {
             // Save data and exit chatbot
             return new ExitCommand();
-        } else if (cmd.equals("list")) {
+        } else if (cmd.strip().equals("list")) {
             // Display list of tasks
             return new ListCommand();
         } else if (cmd.matches("^mark \\d+$")) {
@@ -56,7 +56,7 @@ public class Parser {
             // Delete a specified task based on task number given
             int taskNumber = validateAndGetTaskNumber(cmd);
             return new DeleteCommand(taskNumber);
-        } else if (cmd.equals("help")) {
+        } else if (cmd.strip().equals("help")) {
             // Opens help interface
             return new HelpCommand();
         } else if (cmd.matches("^find\\s+.+")) {
